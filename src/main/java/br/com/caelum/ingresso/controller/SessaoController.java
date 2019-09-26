@@ -30,7 +30,7 @@ public class SessaoController {
 	@Autowired
 	private SessaoDao sessaoDao;
 
-	@GetMapping("admin/sessao")
+	@GetMapping("/admin/sessao")
 	public ModelAndView form(@RequestParam("salaId") Integer salaId, SessaoForm form) {
 		
 		ModelAndView modelAndView = new ModelAndView("sessao/sessao");
@@ -47,13 +47,13 @@ public class SessaoController {
 		
 	}
 	
-	@PostMapping(value = "admin/sessao")
+	@PostMapping(value = "/admin/sessao")
 	@Transactional
 	public ModelAndView salva(@Valid SessaoForm form, BindingResult result) {
 		
 		if(result.hasErrors()) return form(form.getSalaId(), form);
 		
-		String pagina = "redirect:/admin/sala" + form.getSalaId() + "/sessoes";
+		String pagina = "redirect:/admin/sala/" + form.getSalaId() + "/sessoes";
 		
 		Sessao sessao = form.toSessao(salaDao, filmeDao);
 		
