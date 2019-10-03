@@ -2,9 +2,7 @@ package br.com.caelum.ingresso.controller;
 
 import java.util.List;
 import java.util.Optional;
-
 import javax.validation.Valid;
-import javax.xml.ws.BindingType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +19,7 @@ import br.com.caelum.ingresso.model.Filme;
 import br.com.caelum.ingresso.model.ImagemCapa;
 import br.com.caelum.ingresso.model.Sala;
 import br.com.caelum.ingresso.model.Sessao;
+import br.com.caelum.ingresso.model.TipoDeIngresso;
 import br.com.caelum.ingresso.rest.OmdbClient;
 import br.com.caelum.ingresso.validacao.GerenciadorDeSessao;
 
@@ -89,6 +88,7 @@ public class SessaoController {
 		Optional<ImagemCapa> imagemCapa = client.request(sessao.getFilme(), ImagemCapa.class);
 		modelAndView.addObject("sessao", sessao);
 		modelAndView.addObject("imagemCapa", imagemCapa.orElse(new ImagemCapa()));
+		modelAndView.addObject("tiposDeIngressos", TipoDeIngresso.values());
 		return modelAndView;
 
 	}
